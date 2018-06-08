@@ -73,14 +73,14 @@ def SpectrumFromFITS(Target,DateUT,FluxCalibration):
     
     drive='f:'
     import sys
-    sys.path.append(drive+'\\Astronomy\Python Play')
+    sys.path.append(drive+'\\Astronomy\Python Play\SpectroPhotometry\Spectroscopy')
     sys.path.append(drive+'\\Astronomy\Python Play\SPLibraries')
     import matplotlib.pyplot as pl
     import pylab
     import numpy as np
     #import scipy
     #from PyAstronomy import pyasl #This is where the best smoothing algorithm is!
-    import SpecPhotLibV005 as SPL
+    import SpecPhotLibV006 as SPL
     import datetime
     
     clrs=SPL.StarRainbow()

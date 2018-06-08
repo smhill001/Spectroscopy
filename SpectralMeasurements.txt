@@ -1,0 +1,4 @@
+MeasTarget,DataType,DataTarget,DateUT,Optics,Camera,DataList
+M33,Location,HII Regions,2016,TKE130,ST2000,HII_Tags01.csv
+M81,Location,HII Regions,2016,TKE130,ST2000,Hill_H_II_Tags.csv
+M101,Location,HII Regions,2016,TKE130,ST2000,M101_H_II_Tags.csv

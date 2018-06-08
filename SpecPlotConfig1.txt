@@ -1,0 +1,3 @@
+PlotID,PlotType,X0,X1,DX,Xtype,Y0,Y1,DY,Ytype,DataList,
+Vega,Stars,350.,1050.,50.,1000.,40000000.,7,log,SpectralMeasurements.txt,
+BetLyr,Stars,350.,1050.,50.,3000.,3000000.,7,log,SpectralMeasurements.txt,

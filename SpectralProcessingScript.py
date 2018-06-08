@@ -7,7 +7,7 @@ Spectral Processing Script. Calls SpectrumFromFITS_V002.py
 @author: Steven
 """
 
-import SpectrumFromFITS_V006 as SFF
+import SpectrumFromFITS as SFF
 #
 #WHAT'S BEEN UPGRADED AND WHAT HAS NOT? WHERE IS THE META DATA SCHEMA
 # DOCUMENTED? SMH 3/21/2016
@@ -47,7 +47,7 @@ import SpectrumFromFITS_V006 as SFF
 #SFF.SpectrumFromFITS('BetLyr','20150925UT','ApplyResponse')
 #SFF.SpectrumFromFITS('BetLyr','20151014UT','ApplyResponse')
 #SFF.SpectrumFromFITS('BetLyr','20151015UT','ApplyResponse')
-#SFF.SpectrumFromFITS('BetLyr','20160905UT','ApplyResponse')
+SFF.SpectrumFromFITS('BetLyr','20160905UT','ApplyResponse')
 
 # GamLyr
 #SFF.SpectrumFromFITS('GamLyr','20150913UT','ApplyResponse')
@@ -63,8 +63,11 @@ import SpectrumFromFITS_V006 as SFF
 # Neptune
 #SFF.SpectrumFromFITS('Neptune','20151015UT','ApplyResponse')
 #SFF.SpectrumFromFITS('Neptune','20151108UT','ApplyResponse')
-SFF.SpectrumFromFITS('Neptune','20151109UT','ApplyResponse')
+#SFF.SpectrumFromFITS('Neptune','20151109UT','ApplyResponse')
 #SFF.SpectrumFromFITS('Neptune','20151110UT','ApplyResponse')
 
 # Venus
 #SFF.SpectrumFromFITS('Venus','20150330UT','Planets','ApplyResponse')
+
+# Jovian Moons
+#SFF.SpectrumFromFITS('656HIAJovianMoons','20140309UT','ApplyResponse')
