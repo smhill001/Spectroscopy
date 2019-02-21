@@ -26,8 +26,10 @@ import SpectrumFromFITS as SFF
 #SFF.SpectrumFromFITS('Vega','20150913UT','CreateResponse')
 #SFF.SpectrumFromFITS('Vega','20150925UT','CreateResponse')
 #SFF.SpectrumFromFITS('Vega','20151014UT','CreateResponse')
-#SFF.SpectrumFromFITS('Vega','20151015UT','CreateResponse')
+#SFF.SpectrumFromFITS('Vega','20151015UT','ApplyResponse')
 #SFF.SpectrumFromFITS('Vega','20160905UT','CreateResponse')
+#SFF.SpectrumFromFITS('Vega','20180913UT','ApplyResponse')
+SFF.SpectrumFromFITS('Vega','20180913UT','CreateResponse')
 
 # SigAqr
 #SFF.SpectrumFromFITS('SigAqr','20131023UT','CreateResponse')
@@ -47,7 +49,7 @@ import SpectrumFromFITS as SFF
 #SFF.SpectrumFromFITS('BetLyr','20150925UT','ApplyResponse')
 #SFF.SpectrumFromFITS('BetLyr','20151014UT','ApplyResponse')
 #SFF.SpectrumFromFITS('BetLyr','20151015UT','ApplyResponse')
-SFF.SpectrumFromFITS('BetLyr','20160905UT','ApplyResponse')
+#SFF.SpectrumFromFITS('BetLyr','20160905UT','ApplyResponse')
 
 # GamLyr
 #SFF.SpectrumFromFITS('GamLyr','20150913UT','ApplyResponse')

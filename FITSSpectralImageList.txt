@@ -1,0 +1,6 @@
+MeasTarget,DataType,DataTarget,DateUT,Optics,Camera,Grating,DataList
+Vega,Spectra,550CLR,20180913UT,135mm,ST2000,100lpm,VegaSpectrum-20180913UT-0001thur0012-550OPN-Rot-Crop.fit,
+Vega,Spectra,550CLR?,20180605UT,C8,ST2000,100lpm,VegaSpectra-20180605UT-550OPN-OPNFocus-sum500ms-RotCrop.fit,
+Vega,Spectra,550CLR?,20151015UT,C8,ST2000,200lpm,Vega-20151015UT-CLR-sum1500ms-Rot-Crop.fit,
+Saturn,Spectra,550CLR,20180913UT,135mm,ST2000,100lpm,SaturnSpectrum-20180913UT-0001thru0008-550OPN-Focus1-Rot-Crop.fit,
+Saturn,Spectra,550CLR,20180913UT,135mm,ST2000,100lpm,SaturnSpectrum-20180913UT-0009thru0016-550OPN-Focus2-Rot-Crop.fit
