@@ -1,4 +1,4 @@
 Target,TType,RA2000,DE2000,Dist,Units,mV,SpecType
-Vega,Stars,18.6156,38.7837,25.03,LY,0.0,a0v.txt,
+Vega,Stars,18.6156,38.7837,25.03,LY,0.0,a0v.dat,
 BetLyr,Stars,18.8347,33.36267,967.5,LY,3.42,b8.txt,
-Saturn,Planets,0.0000,0.0000,0.0000,AU,0.00,g2v.txt,
+Saturn,Planets,0.0000,0.0000,0.0000,AU,0.00,g2v.dat,

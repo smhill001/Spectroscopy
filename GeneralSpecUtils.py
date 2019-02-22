@@ -95,8 +95,6 @@ class SpectrumAggregation:
         import numpy as np
         ZeroIndices=np.where(self.signalarray <= 0.)
         self.signalarray[ZeroIndices]=np.nan
-        #pl.figure(figsize=(6.5, 2.5), dpi=150, facecolor="white")
-        #pl.plot(wave,signalarray[:,0])        
         AvgSignal=np.nanmean(self.signalarray,axis=1)
         std=np.nanstd(self.signalarray,axis=1) 
         sem=ST.sem(self.signalarray,axis=1,ddof=0,nan_policy='omit')
