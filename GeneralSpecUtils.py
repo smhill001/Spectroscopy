@@ -5,6 +5,12 @@ Created on Thu Jun 07 14:23:24 2018
 @author: Steven Hill
 """
 
+import sys 
+drive="f:"
+sys.path.append(drive+'\\Astronomy\Python Play\Utils')
+
+import ConfigFiles as CF
+
 def uniform_wave_grid(Wavelength,Signal,Extend=False):
     import numpy as np
     from scipy import interpolate
@@ -57,8 +63,11 @@ class SpectrumAggregation:
         #print path
         for i in range(0,len(ObsList.FileList)):
             print "******** i=",i,ObsList.FileList[i]
-            self.FNList=SRL.GetObsFileNames(self.path,ObsList.FileList[i])
-            print "********len(FNList)",len(self.FNList),self.FNList
+            X=CF.ObsFileNames(ObsList.FileList[i])
+            X.GetFileNames()
+            print X.FNArray
+            self.FNList=X.FNArray
+            print "********X.FNArray",len(X.FNArray),X.FNArray
             if ObsList.DataType[i]=="Reference":
                 path=drive+"/Astronomy/Python Play/SPLibraries/SpectralReferenceFiles/ReferenceLibrary/"
             else:    

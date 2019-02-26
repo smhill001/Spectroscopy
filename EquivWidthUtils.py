@@ -101,18 +101,19 @@ class LinesBands_to_Measure(CF.readtextfilelines):
                         self.WVCont.extend([float(fields[4])])
         
         return 1
+   
+def ComputeEW1(Spectrum,Target,DateTime,BandType,BandName,BandWave1,BandWave2,ContWidth,Outfile,Append):
     
-def ComputeEW(Spectrum,BandName,BandWave1,BandWave2,ContWidth,Outfile,Append):
-    ########I NEED TO HANDLE INCLUSIVE VERSUS EXCLUSIVE INTERVALS FOR 
-    ########BAND INDICES BETTER BOTH FOR THE INTERVAL AND THE CONTINUUM.
+    
     import numpy as np
-    #print "In ComputeEW",BandName,BandWave1,BandWave2,ContWidth,Outfile
+    import datetime
     BandIndices=np.where((Spectrum[:,0] > BandWave1) & (Spectrum[:,0] < BandWave2))
     BandMean=Spectrum[BandIndices,1].mean()
     ContIndices1=np.where((Spectrum[:,0] >BandWave1-ContWidth) & (Spectrum[:,0] < BandWave1))
     ContIndices2=np.where((Spectrum[:,0] >BandWave2) & (Spectrum[:,0] < BandWave2+ContWidth))
     ContIndices=np.concatenate((ContIndices1,ContIndices2),axis=1)
     ContMean=Spectrum[ContIndices,1].mean()
+    print "+++++",BandName,BandIndices
     BandStart=Spectrum[BandIndices,0].min()
     BandEnd=Spectrum[BandIndices,0].max()
     EW=(1.-BandMean/ContMean)*(Spectrum[BandIndices,0].max()-Spectrum[BandIndices,0].min())
@@ -120,8 +121,9 @@ def ComputeEW(Spectrum,BandName,BandWave1,BandWave2,ContWidth,Outfile,Append):
         tempstring=','.join(['%.3f' % num for num in [BandStart,BandEnd,ContWidth,EW]])
     else:    
         tempstring=','.join(['%.3f' % num for num in [BandStart/10.,BandEnd/10.,ContWidth/10.,EW/10.]])
-        
-    tempstring=BandName+","+tempstring+"\n"
+    
+    #tempstring=','.join(['%.3f' % num for num in [BandStart/10.,BandEnd/10.,ContWidth/10.,EW/10.]])
+    tempstring=Target+","+datetime.datetime.strftime(DateTime,'%Y-%m-%d %H:%M:%S')+","+BandType+","+BandName+","+tempstring+"\n"
     if Append:
         with open(Outfile, "a") as text_file:
             text_file.write(tempstring)
