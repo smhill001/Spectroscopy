@@ -31,7 +31,7 @@ class LineBandPhysicsList(CF.readtextfilelines):
             3. Get a single species, limited wavelengths
             4. Get all species, limited wavelengths
         """
-        print "Hi in load_records"
+        print "Hi in LineBandPhysicsList.load_records"
         
         self.Species=[]
         self.ID=[]
@@ -113,7 +113,7 @@ def ComputeEW1(Spectrum,Target,DateTime,BandType,BandName,BandWave1,BandWave2,Co
     ContIndices2=np.where((Spectrum[:,0] >BandWave2) & (Spectrum[:,0] < BandWave2+ContWidth))
     ContIndices=np.concatenate((ContIndices1,ContIndices2),axis=1)
     ContMean=Spectrum[ContIndices,1].mean()
-    print "+++++",BandName,BandIndices
+    #print "+++++",BandName,BandIndices
     BandStart=Spectrum[BandIndices,0].min()
     BandEnd=Spectrum[BandIndices,0].max()
     EW=(1.-BandMean/ContMean)*(Spectrum[BandIndices,0].max()-Spectrum[BandIndices,0].min())
@@ -135,3 +135,35 @@ def ComputeEW1(Spectrum,Target,DateTime,BandType,BandName,BandWave1,BandWave2,Co
         
     
     return 0
+
+class EWObservations(CF.readtextfilelines):
+    pass                
+    
+    def load_records(self,Target="All",BandID="All"):
+
+        print "EWObservations.load_records"
+
+        self.TargetID=[]
+        self.DateTimeUTObs=[]
+        self.BandType=[]
+        self.BandIdentifier=[]
+        self.WV0=[]
+        self.WV1=[]
+        self.ContWV=[]
+        self.EW=[]
+
+        for recordindex in range(0,self.nrecords):
+            #print "recordindex, FirstTime=",recordindex,FirstTime
+            fields=self.CfgLines[recordindex].split(',')
+            if Target=="All" or Target==fields[0]:
+                if BandID=="All" or BandID==fields[3]:
+                    self.TargetID.extend([fields[0]])
+                    self.DateTimeUTObs.extend([fields[1]])
+                    self.BandType.extend([fields[2]])
+                    self.BandIdentifier.extend([fields[3]])
+                    self.WV0.extend([float(fields[4])])
+                    self.WV1.extend([float(fields[5])])
+                    self.ContWV.extend([float(fields[6])])
+                    self.EW.extend([float(fields[7])])
+ 
+        return 0                

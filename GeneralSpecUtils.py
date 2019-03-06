@@ -19,7 +19,7 @@ def uniform_wave_grid(Wavelength,Signal,Extend=False):
         WaveGrid=np.arange(-100,1100,0.5,dtype=float)
     else:
         WaveGrid=np.arange(115,1062.5,0.5,dtype=float)
-        
+    #print Wavelength.size,Signal.size    
     Interp=interpolate.interp1d(Wavelength,Signal,kind='linear', 
                                 copy=True,bounds_error=False, 
                                 fill_value=np.NaN,axis=0)  
