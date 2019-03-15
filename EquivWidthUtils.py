@@ -2,12 +2,17 @@
 """
 Created on Thu Jul 17 13:16:32 2014
 
+    00 CLASS LineBandPhysicsList
+        01 FUNCTION load_records
+    10 CLASS LinesBands_to_Measure
+        11 FUNCTION load_records
+    20 FUNCTION ComputeEW1
+    30 CLASS EWObservations
+    
+
+
 @author: steven.hill
 
-2015-02-17: Considering an update that would provide average or total
-signal in a set of spectral windows when ContWidth is set to zero.
-It would permit simpler band ratio analyses to be conducted that aren't
-dependent on nearby continua.
 
 """
 import sys
@@ -18,7 +23,7 @@ import ConfigFiles as CF
 
 class LineBandPhysicsList(CF.readtextfilelines):
     """
-    TBD
+    PURPOSE: This class 
     
     """
     pass
@@ -103,7 +108,12 @@ class LinesBands_to_Measure(CF.readtextfilelines):
         return 1
    
 def ComputeEW1(Spectrum,Target,DateTime,BandType,BandName,BandWave1,BandWave2,ContWidth,Outfile,Append):
-    
+    """
+    2015-02-17: Considering an update that would provide average or total
+    signal in a set of spectral windows when ContWidth is set to zero.
+    It would permit simpler band ratio analyses to be conducted that aren't
+    dependent on nearby continua.
+    """
     
     import numpy as np
     import datetime

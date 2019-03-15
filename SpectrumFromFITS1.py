@@ -15,7 +15,6 @@ def SpectrumFromFITS1(Target,PlotID,PlotType,DateUT):
     import ConfigFiles as CF
     import PlotUtils as PU
     import FITSSpecUtils as FSU
-    import SysRespLIB as SRL
     import GeneralSpecUtils as GSU
     import numpy as np
     import matplotlib.pyplot as pl
@@ -25,12 +24,12 @@ def SpectrumFromFITS1(Target,PlotID,PlotType,DateUT):
     rootpath="f:/Astronomy/Python Play/SpectroPhotometry/Spectroscopy/"
     TargetParams=CF.Target_Parameters(rootpath+"Target_Parameters.txt")
     PlotParams=PU.PlotSetup(rootpath+"SpecPlotConfig1.txt")
-    MeasParams=SRL.measurement_list(rootpath+"FITSSpectralImageList.txt")
+    MeasParams=CF.measurement_list(rootpath+"FITSSpectralImageList.txt")
     
     TargetParams.loadtargetparams(Target)
     PlotParams.loadplotparams(drive,PlotID,PlotType)
     PlotParams.Setup_Plot()
-    MeasParams.load_select_data(Target,DateUT) #####
+    MeasParams.load_records(Target,DateUT) #####
     #MeasParams.load_all_data() ## I Used this when combining multiple obs of
                                 ## same target, specifically multiple observations
                                 ## for filter calibration.
@@ -61,7 +60,7 @@ def SpectrumFromFITS1(Target,PlotID,PlotType,DateUT):
         pl.legend(loc=0,ncol=1, borderaxespad=0.,prop={'size':6})
         pl.subplots_adjust(left=0.10, bottom=0.14, right=0.98, top=0.92,
                     wspace=None, hspace=None)
-        pl.savefig(path.output_path+Target+'_'+meta.DateKey+'_1D.png',dpi=300)
-        np.savetxt(path.output_path+Target+'_'+meta.DateKey+'_1D_WVCal.txt',spectrum,delimiter=" ",fmt="%10.3F %10.7F")
+        pl.savefig(path.One_D_path+Target+'_'+meta.DateKey+'_1D.png',dpi=300)
+        np.savetxt(path.One_D_path+Target+'_'+meta.DateKey+'_1D_WVCal.txt',spectrum,delimiter=" ",fmt="%10.3F %10.7F")
         
     return specarray,spectrum,meta
