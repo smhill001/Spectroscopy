@@ -52,52 +52,66 @@ class spec_meta_data:
         self.DateObs=""
 
 class SpectrumAggregation:
-    def __init__(self,drive,ObsList):
+    def __init__(self,drive,ObsList,FileList=False):
 #def Average_Spectrum(drive,ObsList):
         import sys
         sys.path.append(drive+'\\Astronomy\Python Play\Techniques Library')
         import numpy as np
         import scipy
-        import SysRespLIB as SRL
         self.path=drive+"/Astronomy/Python Play/TechniquesLibrary/"
         #print path
-        for i in range(0,len(ObsList.FileList)):
-            print "******** i=",i,ObsList.FileList[i]
-            X=CF.ObsFileNames(ObsList.FileList[i])
-            X.GetFileNames()
-            print X.FNArray
-            self.FNList=X.FNArray
-            print "********X.FNArray",len(X.FNArray),X.FNArray
-            if ObsList.DataType[i]=="Reference":
-                path=drive+"/Astronomy/Python Play/SPLibraries/SpectralReferenceFiles/ReferenceLibrary/"
-            else:    
-                path=drive+"/Astronomy/Projects/"+ObsList.DataType[i]+"/"+ObsList.DataTarget[i]+"/Spectral Data/1D Spectra/"
-            
-            ###Need loop over data files here!!! "j"
-            for j in range(0,len(self.FNList)):
-                print "****** j=",j
+        if not(FileList):
+            for i in range(0,len(ObsList.FileList)):
+                print "******** i=",i,ObsList.FileList[i]
+                X=CF.ObsFileNames(ObsList.FileList[i])
+                X.GetFileNames()
+                print X.FNArray
+                self.FNList=X.FNArray
+                print "********X.FNArray",len(X.FNArray),X.FNArray
                 if ObsList.DataType[i]=="Reference":
-                    temp2 = scipy.loadtxt(path+self.FNList[j], dtype=float, usecols=(0,1))
-                else:
-                    temp1 = scipy.fromfile(file=path+self.FNList[j], dtype=float, count=-1, sep='\t')    
-                    temp2 = scipy.reshape(temp1,[temp1.size/2,2])
+                    path=drive+"/Astronomy/Python Play/SPLibraries/SpectralReferenceFiles/ReferenceLibrary/"
+                else:    
+                    path=drive+"/Astronomy/Projects/"+ObsList.DataType[i]+"/"+ObsList.DataTarget[i]+"/Spectral Data/1D Spectra/"
+                ###Need loop over data files here!!! "j"
+                for j in range(0,len(self.FNList)):
+                    print "****** j=",j
+                    if ObsList.DataType[i]=="Reference":
+                        temp2 = scipy.loadtxt(path+self.FNList[j], dtype=float, usecols=(0,1))
+                    else:
+                        temp1 = scipy.fromfile(file=path+self.FNList[j], dtype=float, count=-1, sep='\t')    
+                        temp2 = scipy.reshape(temp1,[temp1.size/2,2])
+                    self.wave = temp2[:,0]
+                    tmpsig=temp2[:,1]
+                    print i
+                    print temp2.shape
+            
+                    if i==0 and j==0:
+                        self.signalarray=np.zeros([tmpsig.size,1])
+                        print self.signalarray.shape
+                        self.signalarray[:,0]=tmpsig
+                    else:
+                        print "i>0 self.signalarray.shape:",self.signalarray.shape
+                        print "temp2.shape: ",temp2.shape
+                        print "temp2[0,0]: ",temp2[0,0]
+                        self.signalarray=np.insert(self.signalarray,1,tmpsig,axis=1)
+                        print "i>0 self.signalarray.shape:",self.signalarray.shape
+            if ObsList.DataType[i]=="Reference":
+                self.wave=self.wave/10.
+        if FileList:
+            First=True
+            self.FNList=ObsList
+            for FN in self.FNList:
+                temp1 = scipy.fromfile(file=FN, dtype=float, count=-1, sep='\t')    
+                temp2 = scipy.reshape(temp1,[temp1.size/2,2])
                 self.wave = temp2[:,0]
                 tmpsig=temp2[:,1]
-                print i
-                print temp2.shape
-        
-                if i==0 and j==0:
+                if First:
                     self.signalarray=np.zeros([tmpsig.size,1])
-                    print self.signalarray.shape
+                    #print self.signalarray.shape
                     self.signalarray[:,0]=tmpsig
+                    First=False
                 else:
-                    print "i>0 self.signalarray.shape:",self.signalarray.shape
-                    print "temp2.shape: ",temp2.shape
-                    print "temp2[0,0]: ",temp2[0,0]
                     self.signalarray=np.insert(self.signalarray,1,tmpsig,axis=1)
-                    print "i>0 self.signalarray.shape:",self.signalarray.shape
-        if ObsList.DataType[i]=="Reference":
-            self.wave=self.wave/10.
 
     def ComputeAverageandStats(self):
         import scipy.stats as ST

@@ -117,12 +117,15 @@ def ComputeEW1(Spectrum,Target,DateTime,BandType,BandName,BandWave1,BandWave2,Co
     
     import numpy as np
     import datetime
+    print DateTime
     BandIndices=np.where((Spectrum[:,0] > BandWave1) & (Spectrum[:,0] < BandWave2))
     BandMean=Spectrum[BandIndices,1].mean()
+    print BandMean
     ContIndices1=np.where((Spectrum[:,0] >BandWave1-ContWidth) & (Spectrum[:,0] < BandWave1))
     ContIndices2=np.where((Spectrum[:,0] >BandWave2) & (Spectrum[:,0] < BandWave2+ContWidth))
     ContIndices=np.concatenate((ContIndices1,ContIndices2),axis=1)
     ContMean=Spectrum[ContIndices,1].mean()
+    print ContMean
     #print "+++++",BandName,BandIndices
     BandStart=Spectrum[BandIndices,0].min()
     BandEnd=Spectrum[BandIndices,0].max()
