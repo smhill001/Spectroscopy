@@ -29,7 +29,10 @@ import SpectrumFromFITS as SFF
 #SFF.SpectrumFromFITS('Vega','20151015UT','ApplyResponse')
 #SFF.SpectrumFromFITS('Vega','20160905UT','CreateResponse')
 #SFF.SpectrumFromFITS('Vega','20180913UT','ApplyResponse')
-SFF.SpectrumFromFITS('Vega','20180913UT','CreateResponse')
+#SFF.SpectrumFromFITS('Vega','20180913UT','CreateResponse')
+#SFF.SpectrumFromFITS('Vega','20201030UT','ApplyResponse')
+#SFF.SpectrumFromFITS('Vega','20201113UT','ApplyResponse')
+SFF.SpectrumFromFITS('Vega','20210727UT','ApplyResponse')
 
 # SigAqr
 #SFF.SpectrumFromFITS('SigAqr','20131023UT','CreateResponse')
@@ -57,6 +60,26 @@ SFF.SpectrumFromFITS('Vega','20180913UT','CreateResponse')
 # M57
 #SFF.SpectrumFromFITS('M57','20150913UT','ApplyResponse')
 #SFF.SpectrumFromFITS('M57','20160905UT','ApplyResponse')
+
+# M42
+#SFF.SpectrumFromFITS('M42 - Wide Field','20201116UT','ApplyResponse')
+#SFF.SpectrumFromFITS('M42 - Wide Field','20201117UT','ApplyResponse')
+#SFF.SpectrumFromFITS('M42 - Wide Field','20201118UT','ApplyResponse')
+#SFF.SpectrumFromFITS('M42 - Wide Field','20201120UT','ApplyResponse')
+#SFF.SpectrumFromFITS('M42 - Wide Field','20201122UT','ApplyResponse')
+#SFF.SpectrumFromFITS('M42 - Wide Field','20201125UT','ApplyResponse')
+#SFF.SpectrumFromFITS('M42 - Wide Field','20201126UT','ApplyResponse')
+#SFF.SpectrumFromFITS('M42 - Wide Field','20210120UT','ApplyResponse')
+
+# Mars
+#SFF.SpectrumFromFITS('Mars','20201116UT','ApplyResponse')
+#SFF.SpectrumFromFITS('Mars','20201117UT','ApplyResponse')
+#SFF.SpectrumFromFITS('Mars','20201122UT','ApplyResponse')
+
+# Capella
+##SFF.SpectrumFromFITS('Capella','20130117UT','ApplyResponse') # Broken
+#SFF.SpectrumFromFITS('Capella','20201125UT','ApplyResponse')
+#SFF.SpectrumFromFITS('Capella','20201204UT','ApplyResponse')
 
 # NGC7009
 #SFF.SpectrumFromFITS('NGC7009','20141003UT','ApplyResponse')

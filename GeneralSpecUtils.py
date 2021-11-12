@@ -11,14 +11,28 @@ sys.path.append(drive+'\\Astronomy\Python Play\Utils')
 
 import ConfigFiles as CF
 
-def uniform_wave_grid(Wavelength,Signal,Extend=False):
+def uniform_wave_grid(Wavelength,Signal,Extend=False,Fine=False):
+    """
+    Takes an existing spectrum on a non-standard or even irregular
+    wavelength grid and performs linear interpolation to place the data
+    on one of four uniform grids:
+        1) -100 to 1100nm with 0.5nm bins (includes zeroeth order)
+        2) -100 to 1100nm with 0.1nm bins
+        3) 115 to 1062.5nm with 0.5nm bins (Pickles standard range)
+        4) 115 to 1062.5nm with 0.1nm bins 
+    """
     import numpy as np
     from scipy import interpolate
 
-    if Extend:
-        WaveGrid=np.arange(-100,1100,0.5,dtype=float)
+    if Fine:    #Set grid interval
+        dwv=0.1
     else:
-        WaveGrid=np.arange(115,1062.5,0.5,dtype=float)
+        dwv=0.5
+
+    if Extend:  #Set grid range
+        WaveGrid=np.arange(-100,1100,dwv,dtype=float)
+    else:
+        WaveGrid=np.arange(115,1062.5,dwv,dtype=float)
     #print Wavelength.size,Signal.size    
     Interp=interpolate.interp1d(Wavelength,Signal,kind='linear', 
                                 copy=True,bounds_error=False, 

@@ -82,6 +82,7 @@ def SpectrumFromFITS(Target,DateUT,FluxCalibration):
     #from PyAstronomy import pyasl #This is where the best smoothing algorithm is!
     import SpecPhotLibV006 as SPL
     import datetime
+    from PyAstronomy import pyasl #This is where the best smoothing algorithm is!
     
     clrs=SPL.StarRainbow()
     plotparams=SPL.spec_plot_params(drive,Target)
@@ -160,10 +161,25 @@ def SpectrumFromFITS(Target,DateUT,FluxCalibration):
         if FluxCalibration=="ApplyResponse":
             pl.plot(MASTER[:,0],plotparams.Y1*Ref[:,1]/2.0,label='System Response x'+str(plotparams.Y1/2.0))
             pl.plot(NormResponsewithWV[:,0],NormResponsewithWV[:,1],label='Calibrated',linewidth=1)
+            temp=pyasl.smooth(NormResponsewithWV[:,1],3,'flat')
+            pl.plot(NormResponsewithWV[:,0],temp,label='Calibrated, smoothed',linewidth=1)
             if plotparams.TargetType=="Nebulae-Planetary":
                 pl.plot(NormResponsewithWV[:,0],10*NormResponsewithWV[:,1],label='10xCalibrated',linewidth=0.5)
+                pl.plot(NormResponsewithWV[:,0],10*temp,label='10xCalibrated, smoothed',linewidth=1)
                 pl.plot(MASTER[:,0],10*MASTER[:,1],label='10xMASTER',color='k',linewidth=0.5)
         
+        EWFN=drive+DataPath+'EWs/'+Target+DateTimeKeyArray[Obsindex]+'UT-Albedo-EW.txt'
+        
+        #Given an ObsBandFile, load the relevant bands for a given observation
+        BandNameArray,BandStartArray,BandEndArray,ContWidthArray,LabelHeightArray= \
+            SPL.GetObsBands(drive+DataPath+"Configuration Files/"+ObsBandFile)
+        print "***********len[BandNameArray]:",len(BandNameArray)
+        for l in range(0,len(BandNameArray)):
+            print "**********float(BandNameArray[l][0:3])", float(BandNameArray[l][0:3])                         
+            pl.text(float(BandNameArray[l][0:3]),LabelHeightArray[l],BandNameArray[l],fontsize=6,
+                verticalalignment='bottom',horizontalalignment='center',
+                rotation='vertical')
+
         pl.legend(loc=0,ncol=1, borderaxespad=0.,prop={'size':6})
         #DISPERSION ANNOTATION
         #pl.text(700., 7e7, "Disp.: " + str(round(NativeDispersionNM,3))+" nm/pix",fontsize=6)
@@ -177,11 +193,6 @@ def SpectrumFromFITS(Target,DateUT,FluxCalibration):
         #COMPUTE EQUIVALENT WITDTHS OF IDENTIFIED BANDS
         ###############################################################################
 
-        EWFN=drive+DataPath+'EWs/'+Target+DateTimeKeyArray[Obsindex]+'UT-Albedo-EW.txt'
-        
-        #Given an ObsBandFile, load the relevant bands for a given observation
-        BandNameArray,BandStartArray,BandEndArray,ContWidthArray,LabelHeightArray= \
-            SPL.GetObsBands(drive+DataPath+"Configuration Files/"+ObsBandFile)
 
         Key=Target+DateTimeKeyArray[Obsindex]
         datetimestring=DateTimeKeyArray[Obsindex]
